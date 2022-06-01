@@ -11,19 +11,16 @@
       .organic {
         box-shadow: 1px 2px 3px gainsboro;
       }
-      .not-organic {
-        display: none;
-      }
     </style>
   </head>
   <title>Node Farm</title>
   <body>
     <div>
       <p class="organic {%NOT_ORGANIC%}">oraginic</p>
-      <h1>name of the product: {%PRODUCTNAME%}</h1>
+      <h1>{%PRODUCTNAME%}</h1>
       <h1>{%IMAGE%}</h1>
-      <h1>country: {%COUNTRY%}</h1>
-      <h1>price: {%PRICE%}$</h1>
+      <h1>{%COUNTRY%}</h1>
+      <h1>{%PRICE%}$</h1>
     </div>
   </body>
 </html>

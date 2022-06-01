@@ -5,11 +5,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>overview</title>
+    <style>
+      .products {
+        display: grid;
+        gap: 5px;
+        grid-template-columns: repeat(3, 1fr);
+        margin: 30px;
+      }
+      .not-organic {
+        display: none;
+      }
+      .card {
+        box-shadow: 5px 10px 10px 10px gainsboro;
+        padding: 20px;
+      }
+      .card:hover {
+        background: gainsboro;
+        cursor: pointer;
+      }
+    </style>
   </head>
   <body>
     <div>
       <h1>node farm</h1>
-      {%PRODUCT_CARD%}
+      <div class="products">{%PRODUCT_CARD%}</div>
     </div>
   </body>
 </html>

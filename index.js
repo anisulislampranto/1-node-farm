@@ -1,3 +1,4 @@
+const { doesNotThrow, notDeepEqual } = require("assert");
 const fs = require("fs");
 const http = require("http");
 const url = require("url");
@@ -19,18 +20,58 @@ const url = require("url");
 /////////////
 // server
 
-// readfile will be executed once and will be distributed when its needed
+const replaceTemplate = (temp, product) => {
+  let output = temp.replace(/{%PRODUCTNAME%}/g, product.productName);
+  output = output.replace(/{%IMAGE%}/g, product.image);
+  output = output.replace(/{%COUNTRY%}/g, product.country);
+  output = output.replace(/{%PRICE%}/g, product.price);
+  output = output.replace(/{%ID%}/g, product.id);
+
+  if (!product.organic)
+    output = output.replace(/{%NOT_ORGANIC%}/g, "not-organic");
+
+  return output;
+};
+
+// readfile will be executed once because the file is alwasy same and will be distributed when its needed
+const tempOverview = fs.readFileSync(
+  `${__dirname}/templates/template-overview.html`,
+  "utf-8"
+);
+const tempCard = fs.readFileSync(
+  `${__dirname}/templates/template-card.html`,
+  "utf-8"
+);
+const tempProduct = fs.readFileSync(
+  `${__dirname}/templates/template-product.html`,
+  "utf-8"
+);
 const data = fs.readFileSync(`${__dirname}/dev-data/data.json`, "utf-8");
 const dataObject = JSON.parse(data);
 
 const server = http.createServer((req, res) => {
   const pathName = req.url;
 
+  // overview page
   if (pathName === "/" || pathName === "/overview") {
-    res.end("this is the overview");
-  } else if (pathName === "/product") {
+    res.writeHead(200, { "Content-type": "text/html" });
+
+    const cardsHtml = dataObject
+      .map((product) => replaceTemplate(tempCard, product))
+      .join("");
+    const output = tempOverview.replace(/{%PRODUCT_CARD%}/g, cardsHtml);
+    // console.log(cardsHtml);
+
+    res.end(output);
+  }
+
+  // product page
+  else if (pathName === "/product") {
     res.end("this is product page");
-  } else if (pathName === "/api") {
+  }
+
+  //API
+  else if (pathName === "/api") {
     // it isn't preferred way because it will read file on every server creation call which is not a good practice
     // fs.readFileSync(`${__dirname}/dev-data/data.json`, "utf-8", (err, data) => {
     //   const dataObject = JSON.parse(data);

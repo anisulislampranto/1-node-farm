@@ -1,7 +1,7 @@
 [
 {
 "id": 1, 
-"productName":  "cordsoup",
+"productName":  "corn",
 "image": "🌽",
 "country": "germany",
 "price":"2.60",
@@ -9,7 +9,7 @@
 },
 {
 "id": 2, 
-"productName":  "cordsoup",
+"productName":  "cornsoup",
 "image": "🍲 ",
 "country": "germany",
 "price":"2.60",
