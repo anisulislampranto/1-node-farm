@@ -1,6 +1,7 @@
 const fs = require("fs");
 const http = require("http");
 const url = require("url");
+const replaceTemplate = require("./modules/replaceTemplate");
 
 // // blocking synchronous way
 // const textIn = fs.readFileSync("./txt/input.txt", "utf-8");
@@ -15,20 +16,6 @@ const url = require("url");
 // });
 
 // console.log("this code will be first");
-
-const replaceTemplate = (temp, product) => {
-  let output = temp.replace(/{%PRODUCTNAME%}/g, product?.productName);
-  output = output.replace(/{%IMAGE%}/g, product?.image);
-  output = output.replace(/{%COUNTRY%}/g, product?.country);
-  output = output.replace(/{%PRICE%}/g, product?.price);
-  output = output.replace(/{%ID%}/g, product?.id);
-
-  if (!product.organic) {
-    return (output = output.replace(/{%NOT_ORGANIC%}/g, "not-organic"));
-  }
-
-  return output;
-};
 
 // readfile will be executed once because the file is alwasy same and will be distributed when its needed
 const tempOverview = fs.readFileSync(
