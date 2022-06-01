@@ -22,7 +22,6 @@ const url = require("url");
 // readfile will be executed once and will be distributed when its needed
 const data = fs.readFileSync(`${__dirname}/dev-data/data.json`, "utf-8");
 const dataObject = JSON.parse(data);
-console.log(dataObject);
 
 const server = http.createServer((req, res) => {
   const pathName = req.url;

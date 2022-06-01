@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="/dist/output.css" rel="stylesheet" />
+
+    <title>Document</title>
+    <style>
+      .organic {
+        box-shadow: 1px 2px 3px gainsboro;
+      }
+      .not-organic {
+        display: none;
+      }
+    </style>
+  </head>
+  <title>Node Farm</title>
+  <body>
+    <div>
+      <p class="organic {%NOT_ORGANIC%}">oraginic</p>
+      <h1>name of the product: {%PRODUCTNAME%}</h1>
+      <h1>{%IMAGE%}</h1>
+      <h1>country: {%COUNTRY%}</h1>
+      <h1>price: {%PRICE%}$</h1>
+    </div>
+  </body>
+</html>
